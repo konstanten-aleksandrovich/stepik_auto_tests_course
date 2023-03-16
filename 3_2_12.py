@@ -1,13 +1,15 @@
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import pytest
 
-try:
-    o='''Введите 1 или 2 для  проверки страницы
+def f(n):
+    o = '''Введите 1 или 2 для  проверки страницы
     1 - "http://suninjuly.github.io/registration1.html"
     2 - "http://suninjuly.github.io/registration2.html
     Ведите цифру  1 или 2 и нажмите ENTER :"'''
-    link = f"http://suninjuly.github.io/registration{input(o)}.html"
+    link = f"http://suninjuly.github.io/registration{n}.html"
     browser = webdriver.Chrome()
     browser.get(link)
     n = ['Input your first name', 'Input your last name', 'Input your email']
@@ -25,13 +27,18 @@ try:
     # находим элемент, содержащий текст
     welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
     # записываем в переменную welcome_text текст из элемента welcome_text_elt
-    welcome_text = welcome_text_elt.text
+    t=welcome_text_elt.text
+    print(t)
+    return t
 
-    # с помощью assert проверяем, что ожидаемый текст совпадает с текстом на странице сайта
-    assert "Congratulations! You have successfully registered!" == welcome_text
 
-finally:
-    # ожидание чтобы визуально оценить результаты прохождения скрипта
-    time.sleep(10)
-    # закрываем браузер после всех манипуляций
-    browser.quit()
+class TestAbs(unittest.TestCase):
+    def test_abs1(self):
+        self.assertEqual(f(1),'')
+    def test_abs2(self):
+        self.assertEqual(f(2),'')
+
+
+
+if __name__ == "__main__":
+    unittest.main()
