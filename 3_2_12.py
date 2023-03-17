@@ -34,11 +34,11 @@ def f(n):
 
 class TestAbs(unittest.TestCase):
     def test_abs1(self):
-        self.assertEqual(f(1),'')
+        assert f(1)=='Congratulations! You have successfully registered!',''
     def test_abs2(self):
-        self.assertEqual(f(2),'')
+        assert f(2)=='Congratulations! You have successfully registered!',''
 
 
 
 if __name__ == "__main__":
-    unittest.main()
+    pytest.main()
